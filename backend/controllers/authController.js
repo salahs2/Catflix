@@ -7,29 +7,29 @@ export async function Signup(req, res){
         const {email, password, username} = req.body;
 
         if(!email || !password || !username) {
-            return res.statust(400).json({success:false,message:"All fields are required"})
+            return res.statust(400).json({success:false,message:"All fields are required"});
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if(!emailRegex.test(email)){
-            return res.status(400).json({success:false, message:"Invalid email"})
+            return res.status(400).json({success:false, message:"Invalid email"});
         }
 
         if(password.length < 6){
-            return res.status(400).json({success:false, message:"Password must be at least 6 characters"})
+            return res.status(400).json({success:false, message:"Password must be at least 6 characters"});
         }
 
-        const existingUserByEmail = await User.findone({email:email})
+        const existingUserByEmail = await User.findone({email:email});
 
         if(existingUserByEmail){
-            return res.status(400).json({success:false, message:"Email already exists"})
+            return res.status(400).json({success:false, message:"Email already exists"});
         }
 
-        const existingUserByUsername = await User.findone({username:username})
+        const existingUserByUsername = await User.findone({username:username});
 
         if(existingUserByUsername){
-            return res.status(400).json({success:false, message: "Username already exists"})
+            return res.status(400).json({success:false, message: "Username already exists"});
         }
 
         const salt = await bcryptjs.genSalt(10);
@@ -73,7 +73,7 @@ export async function Login(req, res){
             return res.status(400).json({success: false, message: "All fields are required"});
         }
 
-        const user = await User.findone({email : email})
+        const user = await User.findone({email : email});
 
         if(!user) {
             return res.status(404).json({success: false, message: "Invalid Credentials"});
