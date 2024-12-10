@@ -7,7 +7,7 @@ export async function Signup(req, res){
         const {email, password, username} = req.body;
 
         if(!email || !password || !username) {
-            return res.statust(400).json({success:false,message:"All fields are required"});
+            return res.status(400).json({success:false,message:"All fields are required"});
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,13 +20,13 @@ export async function Signup(req, res){
             return res.status(400).json({success:false, message:"Password must be at least 6 characters"});
         }
 
-        const existingUserByEmail = await User.findone({email:email});
+        const existingUserByEmail = await User.findOne({email:email});
 
         if(existingUserByEmail){
             return res.status(400).json({success:false, message:"Email already exists"});
         }
 
-        const existingUserByUsername = await User.findone({username:username});
+        const existingUserByUsername = await User.findOne({username:username});
 
         if(existingUserByUsername){
             return res.status(400).json({success:false, message: "Username already exists"});
@@ -73,7 +73,7 @@ export async function Login(req, res){
             return res.status(400).json({success: false, message: "All fields are required"});
         }
 
-        const user = await User.findone({email : email});
+        const user = await User.findOne({email : email});
 
         if(!user) {
             return res.status(404).json({success: false, message: "Invalid Credentials"});
@@ -108,5 +108,15 @@ export async function Logout(req, res){
     } catch (error) {
         console.log("Error in logout controller", error.message);
         res.status(500).json({success : false, message: "Internal server error"});
+    }
+}
+
+export async function authCheck(req, res) {
+    try {
+        console.log("req.user:", req.user);
+        res.status(200).json({success: true, user: req.user});
+    } catch (error) {
+        console.log("Error in authCheck controller", error.message);
+        res.status(500).json({success:false, message: "Internal Server Error"})
     }
 }
