@@ -5,8 +5,8 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ReactPlayer from "react-player";
-import { ORIGINAL_IMG_BASE_URL, SMALL_IMG_BASE_URL } from "./utils/constants.js";
-import { formatReleaseDate } from "./utils/dateFunction.js";
+import { ORIGINAL_IMG_BASE_URL, SMALL_IMG_BASE_URL } from "../utils/constants.js";
+import { formatReleaseDate } from "../utils/dateFunction.js";
 import WatchPageSkeleton from "../components/skeletons/WatchPageSkeleton.jsx";
 
 const WatchPage = () => {
@@ -154,7 +154,7 @@ const WatchPage = () => {
 				</div>
 
 				{/* movie details */}
-				<div
+				{/* <div
 					className='flex flex-col md:flex-row items-center justify-between gap-20 
 				max-w-6xl mx-auto'
 				>
@@ -176,7 +176,7 @@ const WatchPage = () => {
 						alt='Poster image'
 						className='max-h-[600px] rounded-md'
 					/>
-				</div>
+				</div> */}
 
 				{similarContent.length > 0 && (
 					<div className='mt-12 max-w-5xl mx-auto relative'>

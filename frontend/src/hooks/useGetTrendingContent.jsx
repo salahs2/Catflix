@@ -3,6 +3,7 @@ import { useContentStore } from "../store/content";
 import axios from "axios";
 
 const useGetTrendingContent = () => {
+	
 	const [trendingContent, setTrendingContent] = useState(null);
 	const { contentType } = useContentStore();
 
